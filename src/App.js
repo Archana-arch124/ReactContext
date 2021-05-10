@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './App.css';
+import Modal from './Components/portal';
+import Portal from './Components/portal';
 // first we will make a new context
 const MyContext = React.createContext();
 
@@ -32,25 +34,32 @@ const Family = () => (
   </div>
 )
 
-class Person extends Component {
-  render() {
-    return (
-      <div className="person">
-        <MyContext.Consumer>
-          {(context) => (
-            <React.Fragment>
-              <p>Name: {context.state.name}</p>
-              <p>Age: {context.state.age}</p>
-              <p>Education: {context.state.education}</p>
-              <p>TechSkills: {context.state.techSkills}</p>
-              <p>Location: {context.state.location}</p>
-              <button onClick={context.growAYearOlder} style={{ backgroundColor: 'pink' }}>BIRTHDAY</button>
-            </React.Fragment>
-          )}
-        </MyContext.Consumer>
-      </div>
-    )
-  }
+function Person() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+
+    <div className="person">
+      <MyContext.Consumer>
+        {(context) => (
+          <React.Fragment>
+            <p>Age: {context.state.age}</p>
+            <p>Name: {context.state.name}</p>
+            <p>Education: {context.state.education}</p>
+            <p>TechSkills: {context.state.techSkills}</p>
+            <p>Location: {context.state.location}</p>
+            <button onClick={context.growAYearOlder} style={{ backgroundColor: 'pink' }}>BIRTHDAY</button>
+            <button onClick={() => setIsOpen(true)} style={{ marginLeft: "30px", backgroundColor: 'pink' }}>Wishes</button>
+
+            <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+              <p> Happy Birthday Archana 🎊🎂</p>
+            </Modal>
+            <Portal />
+          </React.Fragment>
+        )}
+      </MyContext.Consumer>
+    </div>
+  )
 }
 
 
