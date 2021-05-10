@@ -36,9 +36,7 @@ const Family = () => (
 
 function Person() {
   const [isOpen, setIsOpen] = useState(false)
-
   return (
-
     <div className="person">
       <MyContext.Consumer>
         {(context) => (
@@ -62,7 +60,6 @@ function Person() {
   )
 }
 
-
 class App extends Component {
   render() {
     return (
@@ -77,6 +74,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;
